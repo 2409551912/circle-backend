@@ -71,7 +71,11 @@ return [
     'controller_auto_search' => false,
 
     // 视图输出字符串内容替换
-    'view_replace_str'       => [],
+    'view_replace_str'       => [
+
+        'PUBLIC_PATH' => 'http://123.249.54.19:8085'
+
+    ],
     'url_route_on'  =>  true,
 
 
