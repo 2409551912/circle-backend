@@ -14,7 +14,8 @@ return [
         'name' => '\w+',
     ],
     '[index]'     => [
-        '/' => ['index/index', ['method' => 'get']],
+        '/' => ['Index/index', ['method' => 'get']],
+        '/post/publish'=>['Post/publish',['method' => 'get']]
     ],
 
 ];

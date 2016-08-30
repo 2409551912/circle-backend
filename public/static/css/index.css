@@ -1,0 +1,121 @@
+html{
+    font-family: "Hiragino Sans GB","Microsoft YaHei","微软雅黑",tahoma,arial,simhei,"黑体";
+}
+body{
+    background: #ededef;
+}
+/*顶部*/
+.public-header{
+    width: 100%;
+    height: 5rem;
+    background: #24292c;
+    color: #ededed;
+}
+.public-header .box{
+    margin: 0 auto;
+    width: 60rem;
+}
+.public-header .logo{
+    font-size: 2rem;
+    display: inline-block;
+    margin: 1.5rem 4rem auto 0;
+    font-family: "SimSun";
+}
+.public-header .nav{
+    display: inline-block;
+}
+.public-header .nav ul{
+    list-style-type: none;
+}
+
+.module-wrap{
+    width: 90%;
+    margin: 0 auto;
+}
+.module-wrap .col{
+    float: left;
+    width: 24%;
+    margin-right: 1.333%;
+    margin-top: 2.5rem;
+}
+.module-wrap .col:last-of-type{
+    margin-right: 0;
+}
+.module-wrap .module{
+    background: #fff;
+    margin-bottom: 1rem;
+    padding: 0.6rem 0 1.2rem 0;
+    border-radius: 5px;
+    box-shadow: 0px 3px 6px -2px #666;
+}
+.module-wrap .module .head{
+    width: 66%;
+    display: inline-block;
+    font-size: 0.95rem;
+}
+.module-wrap .module .head img{
+    width: 2.2rem;
+    border-radius: 50%;
+    margin-left: 0.6rem;
+    margin-right: 1rem;
+    vertical-align: middle;
+}
+.module-wrap .module .focus{
+    width: 34%;
+    display: inline-block;
+    text-align: center;
+}
+.module-wrap .module .focus span{
+    display: inline-block;
+    border: 1px solid #9ac600;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+    color: #9ac600;
+    border-radius: 4px;
+}
+.module-wrap .module .topic{
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 0.8rem;
+}
+.module-wrap .module .topic li{
+    line-height: 20px;
+    color: #666;
+    font-size: 0.9rem;
+}
+.module-wrap .module .more{
+    width: 100%;
+    text-align: right;
+    margin-top: 0.5rem;
+}
+.module-wrap .module .more span{
+    margin-right: 1.2rem;
+    color: #666;
+}
+
+/*发布帖子*/
+.post-publish{
+    width: 70%;
+    margin: 0 auto;
+}
+.post-publish .editor{
+    width: 60%;
+    margin-top: 1rem;
+}
+.post-publish .editor .title p{
+    border-left: 3px solid #9ac600;
+    height: 20px;
+    line-height: 20px;
+    font-size: 0.9rem;
+    padding-left: 0.5rem;
+}
+.post-publish .title input{
+    margin-top: 1rem;
+    width: 100%;
+}
+.post-publish .content textarea{
+    width: 100%;
+    margin-top: 1rem;
+}
+
+
