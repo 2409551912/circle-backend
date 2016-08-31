@@ -10,4 +10,7 @@ class Index extends Controller
         $this->assign('name','ThinkPHP');
         return $this->fetch('./index');
     }
+    public function register(){
+        var_dump('ha');
+    }
 }

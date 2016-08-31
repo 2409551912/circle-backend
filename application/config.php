@@ -76,7 +76,10 @@ return [
         'PUBLIC_PATH' => 'http://123.249.54.19:8085',
 //        'ROOT_PATH' => 'http://123.249.54.19:8085'
     ],
+
+    //路由配置
     'url_route_on'  =>  true,
+    'url_route_must'=>  true,
 
 
 

@@ -13,9 +13,13 @@ return [
     '__pattern__' => [
         'name' => '\w+',
     ],
+    '/' => ['Index/index', ['method' => 'get']],
     '[index]'     => [
         '/' => ['Index/index', ['method' => 'get']],
-        '/post/publish'=>['Post/publish',['method' => 'get']]
+        '/post/publish'=>['Post/publish',['method' => 'get']],
+        '/login' => ['Index/login',['method' => 'get']],
+
+        '/user/register' => ['User/register',['method' => 'post']]
     ],
 
 ];
