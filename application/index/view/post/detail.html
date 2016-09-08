@@ -1,0 +1,128 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="PUBLIC_PATH/static/css/reset.css">
+    <link rel="stylesheet" href="PUBLIC_PATH/static/css/common.css">
+    <link rel="stylesheet" href="PUBLIC_PATH/static/css/index.css">
+</head>
+<body>
+<!--<div style="width: 50px;height:100px;background-color: green;float: left"></div>-->
+<!--<div style="margin-left: 50px;height:100px;">-->
+<!--<div style="background-color: #000;height:100px;"></div>-->
+<!--</div>-->
+{include file="header" /}
+<div class="post-detail">
+    <div class="outer">
+
+        <div class="detail clearfix">
+            <div class="inner">
+                <div class="user clearfix">
+
+                    <p class="title">{$post->title}</p>
+
+                    <div class="user-info">
+                        <img src="http://cdn.bangyoung.com/cdn/user_portrait/20160902/beijingdaxue/32r2r2r.jpg" alt="" class="host-head">
+                        <p class="name">{$post->username}</p>
+                    </div>
+
+                </div>
+                <div class="post">
+                   <p class="content">{$post->content}</p>
+                    <a href="" class="comment">参与评论</a>
+                    <i class="iconfont praise">&#xe601;</i>
+                </div>
+
+                <div class="comment-order">
+                    <a href="">最新评论</a>
+                    <a href="">热门评论</a>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="item clearfix">
+            <img src="http://cdn.bangyoung.com/cdn/user_portrait/20160902/beijingdaxue/32r2r2r.jpg" alt="" class="head">
+            <div class="comment">
+                <div class="comment-box">
+                    <p class="user">
+                        <span class="name">小小鸟</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="time">2016-09-03 17:50:05</span></p>
+                    <div class="content">
+                        好好学习,天天向上啊
+                    </div>
+                    <p class="interact"><span>热度(10)</span><span>评论(1)</span><span>点赞 <i class="iconfont praise">&#xe601;</i></span></p>
+                </div>
+
+            </div>
+        </div>
+        <div class="item clearfix">
+            <img src="http://cdn.bangyoung.com/cdn/user_portrait/20160902/beijingdaxue/32r2r2r.jpg" alt="" class="head">
+            <div class="comment">
+                <div class="comment-box">
+                    <p class="user">
+                        <span class="name">小小鸟</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="time">2016-09-03 17:50:05</span></p>
+                    <div class="content">
+                        好好学习,天天向上啊
+                    </div>
+                    <p class="interact"><span>热度(10)</span><span>评论(1)</span><span>点赞 <i class="iconfont praise">&#xe601;</i></span></p>
+                </div>
+
+            </div>
+        </div>
+        <div class="item clearfix">
+            <img src="http://cdn.bangyoung.com/cdn/user_portrait/20160902/beijingdaxue/32r2r2r.jpg" alt="" class="head">
+            <div class="comment">
+                <div class="comment-box">
+                    <p class="user">
+                        <span class="name">小小鸟</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="time">2016-09-03 17:50:05</span></p>
+                    <div class="content">
+                        好好学习,天天向上啊
+                    </div>
+                    <p class="interact"><span>热度(10)</span><span>评论(1)</span><span>点赞<i class="iconfont praise">&#xe601;</i></span></p>
+                </div>
+
+            </div>
+        </div>
+        <div class="item clearfix">
+            <img src="http://cdn.bangyoung.com/cdn/user_portrait/20160902/beijingdaxue/32r2r2r.jpg" alt="" class="head">
+            <div class="comment">
+                <div class="comment-box">
+                    <p class="user">
+                        <span class="name">小小鸟</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="time">2016-09-03 17:50:05</span></p>
+                    <div class="content">
+                        好好学习,天天向上啊
+                    </div>
+                    <p class="interact"><span>热度(10)</span><span>评论(1)</span><span>点赞 <i class="iconfont praise">&#xe601;</i></span></p>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" src="PUBLIC_PATH/static/js/jquery-1.11.3.min.js"></script>
+<!--<script type="text/javascript" src="PUBLIC_PATH/static/js/header.js"></script>-->
+<script type="text/javascript">
+
+    $("#publish").click(function () {
+
+
+        var v = {
+            title : $("[name=title]").val(),
+            content : $("[name=content]").val(),
+            tag_id : $("[name=tag_id]").val()
+        };
+
+        console.log(v);
+        $.post('/index/post/publish_post',v,function (data,status) {
+            if(data.ret == 1){
+                window.location.href='/';
+            }
+        })
+    })
+
+
+</script>
+</html>

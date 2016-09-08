@@ -1,0 +1,149 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="PUBLIC_PATH/static/css/reset.css">
+    <link rel="stylesheet" href="PUBLIC_PATH/static/css/common.css">
+    <link rel="stylesheet" href="PUBLIC_PATH/static/css/index.css">
+</head>
+<body>
+<!--<div style="width: 50px;height:100px;background-color: green;float: left"></div>-->
+<!--<div style="margin-left: 50px;height:100px;">-->
+    <!--<div style="background-color: #000;height:100px;"></div>-->
+<!--</div>-->
+{include file="header" /}
+<div class="post-list">
+    <div class="outer">
+
+        {foreach name="list" item="vo"}
+        <div class="item clearfix">
+            <img src="http://cdn.bangyoung.com/cdn/user_portrait/20160902/beijingdaxue/32r2r2r.jpg" alt="" class="head">
+            <div class="post">
+                <div class="user">
+                    <span class="name">{$vo->username}</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="time">{$vo->create_at|date="Y-m-d H:i:s",###}</span>
+                    <p class="interact">
+                        <i class="iconfont">&#xe602;</i>100<i class="iconfont red">&#xe601;</i>100
+                    </p>
+                </div>
+                <p class="title"><a href="/index/post/detail/{$vo->id}">{$vo->title}</a></p>
+                <p class="content">{$vo->content}</p>
+            </div>
+        </div>
+        {/foreach}
+
+        <div class="item clearfix">
+            <img src="http://cdn.bangyoung.com/cdn/user_portrait/20160902/beijingdaxue/32r2r2r.jpg" alt="" class="head">
+            <div class="post">
+                <div class="user">
+                    <span class="name">老九门大结局</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="time">2016-09-03 17:50:05</span>
+                    <p class="interact">
+                        <i class="iconfont">&#xe602;</i>100<i class="iconfont red">&#xe601;</i>100
+                    </p>
+                </div>
+                <p class="title">好好学习,天天向上</p>
+                <p class="content">卡师傅就看见啥的机房监控就,发送加上地方叫客服.</p>
+            </div>
+        </div>
+        <div class="item clearfix">
+            <img src="http://cdn.bangyoung.com/cdn/user_portrait/20160902/beijingdaxue/32r2r2r.jpg" alt="" class="head">
+            <div class="post">
+                <p class="user"><span class="name">老九门大结局</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="time">2016-09-03 17:50:05</span></p>
+                <p class="title">好好学习,天天向上</p>
+                <p class="content">卡师傅就看见啥的机房监控就,发送加上地方叫客服.</p>
+            </div>
+        </div>
+        <div class="item clearfix">
+            <img src="http://cdn.bangyoung.com/cdn/user_portrait/20160902/beijingdaxue/32r2r2r.jpg" alt="" class="head">
+            <div class="post">
+                <p class="user"><span class="name">老九门大结局</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="time">2016-09-03 17:50:05</span></p>
+                <p class="title">好好学习,天天向上</p>
+                <p class="content">卡师傅就看见啥的机房监控就,发送加上地方叫客服.</p>
+            </div>
+        </div>
+        <div class="item clearfix">
+            <img src="http://cdn.bangyoung.com/cdn/user_portrait/20160902/beijingdaxue/32r2r2r.jpg" alt="" class="head">
+            <div class="post">
+                <p class="user"><span class="name">老九门大结局</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="time">2016-09-03 17:50:05</span></p>
+                <p class="title">好好学习,天天向上</p>
+                <p class="content">卡师傅就看见啥的机房监控就,发送加上地方叫客服.</p>
+            </div>
+        </div>
+        <div class="item clearfix">
+            <img src="http://cdn.bangyoung.com/cdn/user_portrait/20160902/beijingdaxue/32r2r2r.jpg" alt="" class="head">
+            <div class="post">
+                <p class="user"><span class="name">老九门大结局</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="time">2016-09-03 17:50:05</span></p>
+                <p class="title">好好学习,天天向上</p>
+                <p class="content">卡师傅就看见啥的机房监控就,发送加上地方叫客服.</p>
+            </div>
+        </div>
+        <div class="item clearfix">
+            <img src="http://cdn.bangyoung.com/cdn/user_portrait/20160902/beijingdaxue/32r2r2r.jpg" alt="" class="head">
+            <div class="post">
+                <p class="user"><span class="name">老九门大结局</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="time">2016-09-03 17:50:05</span></p>
+                <p class="title">好好学习,天天向上</p>
+                <p class="content">卡师傅就看见啥的机房监控就,发送加上地方叫客服.</p>
+            </div>
+        </div>
+        <div class="item clearfix">
+            <img src="http://cdn.bangyoung.com/cdn/user_portrait/20160902/beijingdaxue/32r2r2r.jpg" alt="" class="head">
+            <div class="post">
+                <p class="user"><span class="name">老九门大结局</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="time">2016-09-03 17:50:05</span></p>
+                <p class="title">好好学习,天天向上</p>
+                <p class="content">卡师傅就看见啥的机房监控就,发送加上地方叫客服.</p>
+            </div>
+        </div>
+        <div class="item clearfix">
+            <img src="http://cdn.bangyoung.com/cdn/user_portrait/20160902/beijingdaxue/32r2r2r.jpg" alt="" class="head">
+            <div class="post">
+                <p class="user"><span class="name">老九门大结局</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="time">2016-09-03 17:50:05</span></p>
+                <p class="title">好好学习,天天向上</p>
+                <p class="content">卡师傅就看见啥的机房监控就,发送加上地方叫客服.</p>
+            </div>
+        </div>
+        <div class="item clearfix">
+            <img src="http://cdn.bangyoung.com/cdn/user_portrait/20160902/beijingdaxue/32r2r2r.jpg" alt="" class="head">
+            <div class="post">
+                <p class="user"><span class="name">老九门大结局</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="time">2016-09-03 17:50:05</span></p>
+                <p class="title">好好学习,天天向上</p>
+                <p class="content">卡师傅就看见啥的机房监控就,发送加上地方叫客服.</p>
+            </div>
+        </div>
+        <div class="item clearfix">
+            <img src="http://cdn.bangyoung.com/cdn/user_portrait/20160902/beijingdaxue/32r2r2r.jpg" alt="" class="head">
+            <div class="post">
+                <p class="user"><span class="name">老九门大结局</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="time">2016-09-03 17:50:05</span></p>
+                <p class="title">好好学习,天天向上</p>
+                <p class="content">卡师傅就看见啥的机房监控就,发送加上地方叫客服.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" src="PUBLIC_PATH/static/js/jquery-1.11.3.min.js"></script>
+<!--<script type="text/javascript" src="PUBLIC_PATH/static/js/header.js"></script>-->
+<script type="text/javascript">
+
+    $("#publish").click(function () {
+
+
+        var v = {
+            title : $("[name=title]").val(),
+            content : $("[name=content]").val(),
+            tag_id : $("[name=tag_id]").val()
+        };
+
+        console.log(v);
+        $.post('/index/post/publish_post',v,function (data,status) {
+            if(data.ret == 1){
+                window.location.href='/';
+            }
+        })
+    })
+
+
+</script>
+</html>

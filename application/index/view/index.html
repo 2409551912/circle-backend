@@ -9,130 +9,112 @@
         {include file="header" /}
         <div class="module-wrap clearfix">
             <div class="col0 col">
-                <div class="module">
-                    <div>
-                        <div class="head">
-                            <img src="static/images/download.jpg" alt="">
-                            <span>科技圈儿</span>
-                        </div><div class="focus">
-                            <span>关注</span>
+                {foreach name="list" item="vo" key = 'k'}
+
+                    {if condition="$k%4 eq 1"}
+                        <div class="module">
+                            <div>
+                                <div class="head">
+                                    <img src="static/images/download.jpg" alt="">
+                                    <span>{$vo['tag']}</span>
+                                </div><div class="focus">
+                                <span>关注</span>
+                            </div>
+                            </div>
+
+                            <ul class="topic">
+                                {foreach name="vo['list']"]" item="v"}
+                                <li><a href="/index/post/list">{$v->title}</a></li>
+                                {/foreach}
+                            </ul>
+                            <div class="more"><span><a href="/index/post/list/{$k}">更多</a></span></div>
                         </div>
-                    </div>
-                    <ul class="topic">
-                        <li>好好学习，天天向上</li>
-                        <li>盛开的花朵也会凋零</li>
-                        <li>滴滴真的能成功吗</li>
-                        <li>永不不要气馁</li>
-                        <li>真的真的真的存在鬼魂吗,真的不太敢相信哎</li>
-                        <li>科比退役胖了，你怎么看</li>
-                        <li>赵丽颖萌的可爱</li>
-                        <li>王宝强挺可凉的</li>
-                        <li>易建联签约湖人</li>
-                        <li>苹果即将发布iphone7</li>
-                    </ul>
-                    <div class="more"><span>更多</span></div>
-                </div>
-                <div class="module">
-                    <div>
-                        <div class="head">
-                            <img src="static/images/download.jpg" alt="">
-                            <span>科技圈儿</span>
-                        </div><div class="focus">
-                        <span>关注</span>
-                    </div>
-                    </div>
-                    <ul class="topic">
-                        <li>好好学习，天天向上</li>
-                        <li>盛开的花朵也会凋零</li>
-                        <li>滴滴真的能成功吗</li>
-                        <li>永不不要气馁</li>
-                        <li>真的真的真的存在鬼魂吗,真的不太敢相信哎</li>
-                        <li>科比退役胖了，你怎么看</li>
-                        <li>赵丽颖萌的可爱</li>
-                        <li>王宝强挺可凉的</li>
-                        <li>易建联签约湖人</li>
-                        <li>苹果即将发布iphone7</li>
-                    </ul>
-                    <div class="more"><span>更多</span></div>
-                </div>
+
+                    {/if}
+
+                {/foreach}
+
             </div>
             <div class="col1 col">
-                <div class="module">
-                    <div>
-                        <div class="head">
-                            <img src="static/images/download.jpg" alt="">
-                            <span>科技圈儿</span>
-                        </div><div class="focus">
-                        <span>关注</span>
-                    </div>
-                    </div>
-                    <ul class="topic">
-                        <li>好好学习，天天向上</li>
-                        <li>盛开的花朵也会凋零</li>
-                        <li>滴滴真的能成功吗</li>
-                        <li>永不不要气馁</li>
-                        <li>真的真的真的存在鬼魂吗,真的不太敢相信哎</li>
-                        <li>科比退役胖了，你怎么看</li>
-                        <li>赵丽颖萌的可爱</li>
-                        <li>王宝强挺可凉的</li>
-                        <li>易建联签约湖人</li>
-                        <li>苹果即将发布iphone7</li>
-                    </ul>
-                    <div class="more"><span>更多</span></div>
-                </div>
+                {foreach name="list" item="vo" key = 'k'}
+
+                    {if condition="$k%4 eq 2"}
+                        <div class="module">
+                            <div>
+                                <div class="head">
+                                    <img src="static/images/download.jpg" alt="">
+                                    <span>{$vo['tag']}</span>
+                                </div><div class="focus">
+                                <span>关注</span>
+                            </div>
+                            </div>
+
+                            <ul class="topic">
+                                {foreach name="vo['list']" item="v"}
+                                <li><a href="#">{$v->title}</a></li>
+                                {/foreach}
+                            </ul>
+                            <div class="more"><span>更多</span></div>
+                        </div>
+
+                    {/if}
+
+                {/foreach}
             </div>
             <div class="col2 col">
-                <div class="module">
-                    <div>
-                        <div class="head">
-                            <img src="static/images/download.jpg" alt="">
-                            <span>科技圈儿</span>
-                        </div><div class="focus">
-                        <span>关注</span>
-                    </div>
-                    </div>
-                    <ul class="topic">
-                        <li>好好学习，天天向上</li>
-                        <li>盛开的花朵也会凋零</li>
-                        <li>滴滴真的能成功吗</li>
-                        <li>永不不要气馁</li>
-                        <li>真的真的真的存在鬼魂吗,真的不太敢相信哎</li>
-                        <li>科比退役胖了，你怎么看</li>
-                        <li>赵丽颖萌的可爱，好想把赵丽颖娶回家啊，哈哈</li>
-                        <li>王宝强挺可凉的</li>
-                        <li>易建联签约湖人，真的真的太激动了，大家怎么看</li>
-                        <li>苹果即将发布iphone7</li>
-                    </ul>
-                    <div class="more"><span>更多</span></div>
-                </div>
+                {foreach name="list" item="vo" key = 'k'}
+
+                    {if condition="$k%4 eq 3"}
+                        <div class="module">
+                            <div>
+                                <div class="head">
+                                    <img src="static/images/download.jpg" alt="">
+                                    <span>{$vo['tag']}</span>
+                                </div><div class="focus">
+                                <span>关注</span>
+                            </div>
+                            </div>
+
+                            <ul class="topic">
+                                {foreach name="vo['list']" item="v"}
+                                <li><a href="#">{$v->title}</a></li>
+                                {/foreach}
+                            </ul>
+                            <div class="more"><span>更多</span></div>
+                        </div>
+
+                    {/if}
+
+                {/foreach}
             </div>
             <div class="col3 col">
-                <div class="module">
-                    <div>
-                        <div class="head">
-                            <img src="static/images/download.jpg" alt="">
-                            <span>科技圈儿</span>
-                        </div><div class="focus">
-                        <span>关注</span>
+                {foreach name="list" item="vo" key = 'k'}
+
+                    {if condition="$k%4 eq 0"}
+                    <div class="module">
+                        <div>
+                            <div class="head">
+                                <img src="static/images/download.jpg" alt="">
+                                <span>{$vo['tag']}</span>
+                            </div><div class="focus">
+                            <span>关注</span>
+                        </div>
+                        </div>
+
+                        <ul class="topic">
+                            {foreach name="vo['list']" item="v"}
+                            <li><a href="#">{$v->title}</a></li>
+                            {/foreach}
+                        </ul>
+                        <div class="more"><span>更多</span></div>
                     </div>
-                    </div>
-                    <ul class="topic">
-                        <li>好好学习，天天向上</li>
-                        <li>盛开的花朵也会凋零</li>
-                        <li>滴滴真的能成功吗</li>
-                        <li>永不不要气馁</li>
-                        <li>真的真的真的存在鬼魂吗,真的不太敢相信哎</li>
-                        <li>科比退役胖了，你怎么看</li>
-                        <li>赵丽颖萌的可爱</li>
-                        <li>王宝强挺可凉的</li>
-                        <li>易建联签约湖人</li>
-                        <li>苹果即将发布iphone7</li>
-                    </ul>
-                    <div class="more"><span>更多</span></div>
-                </div>
+
+                    {/if}
+
+                {/foreach}
             </div>
         </div>
-        <div class="login-mask">
+        <div class="login-mask hid">
             <div class="login-box">
                 <ul class="nav">
                     <li>
@@ -142,52 +124,19 @@
                     </li>
                 </ul>
                 <form action="" class="login-form">
-                    <input type="text" placeholder="请输入账号">
-                    <input type="text" placeholder="请输入密码">
+                    <input type="text" placeholder="请输入账号" name="l-account" class="l-account">
+                    <input type="password" placeholder="请输入密码" name="l-password" class="l-password">
                     <input type="button" value="登陆" id="login">
                 </form>
 
                 <form action="" class="register-form hid" method="post">
                     <input type="text" placeholder="请输入注册账号" name="r-account" class="r-account">
-                    <input type="text" placeholder="请输入注册密码" name="r-password" class="r-password">
+                    <input type="password" placeholder="请输入注册密码" name="r-password" class="r-password">
                     <input type="button" value="注册" id="register">
                 </form>
             </div>
         </div>
     </body>
-<script type="text/javascript" src="static/js/index.js"></script>
 <script type="text/javascript" src="static/js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript">
-    $(".public-header .login").click(function () {
-        alert("hah");
-    });
-
-    $('.login-box .login').click(function () {
-        $(".login-box .login-form").removeClass('hid');
-        $(".login-box .register-form").addClass('hid');
-    });
-    $('.login-box .register').click(function () {
-        $(".login-box .register-form").removeClass('hid')
-        $(".login-box .login-form").addClass('hid');
-    });
-
-    $("#register").click(function () {
-        alert('h');
-        var account = $(".r-account").val(),
-            password = $(".r-password").val(),
-            v = {
-                account : account,
-                password : password
-            };
-        console.log(v);
-
-        $.post('index/user/register',v,
-            function (data,status) {
-                console.log('sd');
-            }
-        );
-    });
-
-
-</script>
+<script type="text/javascript" src="static/js/header.js"></script>
 </html>

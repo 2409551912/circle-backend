@@ -10,6 +10,7 @@ body{
     height: 5rem;
     background: #24292c;
     color: #ededed;
+    position: relative;
 }
 .public-header .box{
     margin: 0 auto;
@@ -27,7 +28,17 @@ body{
 .public-header .nav ul{
     list-style-type: none;
 }
-
+.public-header .account{
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 12px;
+}
+.public-header .account a{
+    color: #fff;
+    text-decoration: none;
+    margin-right: 10px;
+}
 .module-wrap{
     width: 90%;
     margin: 0 auto;
@@ -83,14 +94,23 @@ body{
     color: #666;
     font-size: 0.9rem;
 }
+.module-wrap .module .topic li a{
+    color: #666;
+    text-decoration: none;
+}
+.module-wrap .module .topic li a:hover{
+    text-decoration: underline;
+}
 .module-wrap .module .more{
     width: 100%;
     text-align: right;
     margin-top: 0.5rem;
+    color: #666;
 }
-.module-wrap .module .more span{
+.module-wrap .module .more span a{
     margin-right: 1.2rem;
     color: #666;
+    text-decoration: none;
 }
 
 /*发布帖子*/
@@ -111,8 +131,18 @@ body{
 }
 .post-publish .title input{
     margin-top: 1rem;
-    width: 100%;
+    width: 68%;
+    padding: 0.3rem 0rem;
+    display: inline-block;
 }
+.post-publish select{
+    margin-top: 1rem;
+    width: 30%;
+    padding: 0.3rem 0rem;
+    display: inline-block;
+    margin-left:2%;
+}
+
 .post-publish .content textarea{
     width: 100%;
     margin-top: 1rem;
@@ -153,11 +183,184 @@ body{
     margin: 0 auto;
     margin-top: 2rem;
 }
-.login-box form input[type=text]{
+.login-box form input[type=text],
+.login-box form input[type=password]{
     width: 100%;
     margin-bottom: 1rem;
     padding: 0.5rem 0rem 0.5rem 0.2rem;
 }
 
+.post-list .outer{
+    width: 70%;
+    margin: 0 auto;
+}
+.post-list .outer .item{
+    width: 65%;
+    margin:1rem 0rem 2rem 0rem;
+}
+.post-list .outer .head{
+    width: 45px;
+    height: 45px;
+    margin-right: 20px;
+    float: left;
+
+}
+.post-list .outer .post {
+    margin-left: 65px;
+    color: #666;
+    font-size: 12px;
+
+}
+
+.post-list .outer .post .user {
+    background: #f2fbf2;
+    color: #666;
+    font-size: 12px;
+    padding: 4px 0px;
+    padding-left: 2px;
+    background: #f2fbf2;
+    margin-bottom: 8px;
+
+}
+.post-list .outer .post .user .name{
+    color:#259;
+}
+
+.post-list .outer .post .title{
+    padding-left: 2px;
+    margin-bottom: 8px;
+}
+.post-list .outer .post .title a{
+    color:#666;
+    text-decoration: none;
+}
+.post-list .outer .post .title a:hover{
+    text-decoration: underline;
+}
+.post-list .outer .post .content{
+    padding-left: 2px;
+}
+.post-list .outer .post .interact{
+    float: right;
+    margin-right: 10px;
+}
+.post-list .outer .post .interact i{
+    font-size: 12px;
+    margin-right: 2px;
+    margin-left: 20px;
+}
+.post-list .outer .post .interact i.red{
+    font-size: 13px;
+}
+
+/*帖子详情*/
+.post-detail .outer{
+    width:70%;
+    margin: 0 auto;
+}
+.post-detail .outer .detail{
+    width:75%;
+    margin: 20px 0px;
+}
+.post-detail .outer .inner{
+    margin-left: 70px;
+    background: #fff;
+    border: 1px solid #dfdfdf;
+}
+.post-detail .outer .inner .user-info{
+    float: right;
+    height: 58px;
+}
+.post-detail .inner .user-info .name{
+    font-size: 0.8rem;
+    width: 42px;
+    height: 16px;
+    text-align: center;
+    line-height: 16px;
+}
+.post-detail .outer .host-head{
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+}
 
 
+.post-detail .outer .detail .user{
+    border-bottom: 1px solid #dfdfdf;
+    padding: 0.3rem 1.5rem;
+}
+.post-detail .outer .detail .title{
+    float: left;
+    font-size: 1.2rem;
+    color: #444;
+    height: 58px;
+    line-height: 58px;
+}
+.post-detail .outer .post{
+    color: #444;
+    padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+    border-bottom: 1px solid #dfdfdf;
+}
+.post-detail .outer .post .content{
+    margin-bottom: 1rem;
+}
+.post-detail .outer .post .comment{
+    display: inline-block;
+    background: #81a908;
+    color: #fff;
+    font-size: 0.8rem;
+    text-decoration: none;
+    width: 5.2rem;
+    height: 1.8rem;
+    line-height: 1.8rem;
+    text-align: center;
+}
+.post-detail .outer .post .praise{
+    font-size: 2.5rem;
+    position: relative;
+    top: 0.8rem;
+    left: 2.5rem;
+    color: #aaa;
+}
+.post-detail .outer .comment-order{
+    padding: 1.5rem;
+}
+.post-detail .outer .comment-order a{
+    color: #444;
+    margin-right: 1rem;
+}
+.post-detail .item{
+    width: 75%;
+    margin-bottom: 1.5rem;
+}
+.post-detail .item .head{
+    width: 48px;
+    height: 48px;
+    float: left;
+}
+.post-detail .item .comment{
+    margin-left: 70px;
+}
+.post-detail .item .comment .comment-box{
+    background: #fff;
+    padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+}
+.post-detail .item .comment .user .name{
+    color:#888;
+}
+.post-detail .item .comment .content{
+    margin-top: 1rem;
+}
+.post-detail .item .comment .interact{
+    text-align: right;
+    color: #aaa;
+    font-size: 0.8rem;
+}
+.post-detail .item .comment .interact span{
+    margin-left: 0.8rem;
+}
+.post-detail .item .comment .interact .praise{
+    position: relative;
+    left: 0rem;
+    top: 0rem;
+}
