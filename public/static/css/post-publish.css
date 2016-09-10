@@ -1,0 +1,34 @@
+/*发布帖子*/
+.post-publish{
+    width: 70%;
+    margin: 0 auto;
+}
+.post-publish .editor{
+    width: 60%;
+    margin-top: 1rem;
+}
+.post-publish .editor .title p{
+    border-left: 3px solid #9ac600;
+    height: 20px;
+    line-height: 20px;
+    font-size: 0.9rem;
+    padding-left: 0.5rem;
+}
+.post-publish .title input{
+    margin-top: 1rem;
+    width: 68%;
+    padding: 0.3rem 0rem;
+    display: inline-block;
+}
+.post-publish select{
+    margin-top: 1rem;
+    width: 30%;
+    padding: 0.3rem 0rem;
+    display: inline-block;
+    margin-left:2%;
+}
+
+.post-publish .content textarea{
+    width: 100%;
+    margin-top: 1rem;
+}

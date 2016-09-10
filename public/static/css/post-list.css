@@ -1,0 +1,63 @@
+.post-list .outer{
+    width: 70%;
+    margin: 0 auto;
+}
+.post-list .outer .item{
+    width: 65%;
+    margin:1rem 0rem 2rem 0rem;
+}
+.post-list .outer .head{
+    width: 45px;
+    height: 45px;
+    margin-right: 20px;
+    float: left;
+
+}
+.post-list .outer .post {
+    margin-left: 65px;
+    color: #666;
+    font-size: 12px;
+
+}
+
+.post-list .outer .post .user {
+    background: #f2fbf2;
+    color: #444;
+    font-size: 12px;
+    padding: 4px 0px;
+    padding-left: 2px;
+    background: #f2fbf2;
+    margin-bottom: 8px;
+    background: #fff;
+
+}
+.post-list .outer .post .user .name{
+    color:#259;
+}
+
+.post-list .outer .post .title{
+    padding-left: 2px;
+    margin-bottom: 8px;
+}
+.post-list .outer .post .title a{
+    color:#666;
+    text-decoration: none;
+}
+.post-list .outer .post .title a:hover{
+    text-decoration: underline;
+}
+.post-list .outer .post .content{
+    padding-left: 2px;
+}
+.post-list .outer .post .interact{
+    float: right;
+    margin-right: 10px;
+}
+.post-list .outer .post .interact i{
+    font-size: 12px;
+    margin-right: 2px;
+    margin-left: 20px;
+}
+.post-list .outer .post .interact i.red{
+    font-size: 13px;
+}

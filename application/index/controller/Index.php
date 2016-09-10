@@ -14,9 +14,7 @@ class Index extends Controller
     {
 
         $post = new Post();
-
         $tag_arr = $post->column('tag_id');
-
         foreach ($tag_arr as $t){
 
             $list[$t]['list'] = $post->order('id','desc')->where('tag_id',$t)->limit(10)->select();
@@ -26,6 +24,7 @@ class Index extends Controller
         }
         
         $this->assign('list',$list);
+        $this->assign('username',session('username'));
 
         return $this->fetch('./index');
 
@@ -42,6 +41,7 @@ class Index extends Controller
         if($is_check){
             session('account', $user->account);
             session('user_id', $user->id);
+            session('username', $user->username);
 
             return ['ret'=>1,'message'=>'登陆成功'];
 
@@ -52,5 +52,9 @@ class Index extends Controller
         }
 
         
+    }
+    public function exit_account(){
+        session(null);
+        $this->redirect('/');
     }
 }

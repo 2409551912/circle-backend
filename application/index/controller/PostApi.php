@@ -4,7 +4,8 @@ namespace app\index\controller;
 use \think\Controller;
 use app\index\model\User;
 use app\index\model\Post;
-
+use app\index\model\Interact;
+use app\index\model\InteractReply;
 
 class PostApi extends Controller
 {
@@ -17,8 +18,8 @@ class PostApi extends Controller
             $l->username = $user['username'];
         }
 
-
         $this->assign('list',$list);
+        $this->assign('username',session('username'));
         return $this->fetch('./post/list');
 
     }
@@ -29,7 +30,38 @@ class PostApi extends Controller
         $user = User::get($post->user_id);
         $post->username = $user->username;
 
+        $interact = new Interact();
+
+        $reply = new InteractReply();
+
+        $interact_list = $interact->where('post_id', $id)->order('id','desc')->select();
+        foreach ($interact_list as $interact){
+
+            $username = User::get($interact->from_user_id)->username;
+
+            $interact->username = $username;
+
+            $reply_interact_list = $reply->where('interact_id',$interact->id)->order('id','desc')->select();
+
+            foreach ($reply_interact_list as $r){
+
+                if($r->at_user_id){
+
+                    $user = User::get($r->at_user_id);
+                    $r->at_username = $user->username;
+
+                }
+            }
+
+            $interact->reply_list = $reply_interact_list;
+
+        }
+
+
+
+        $this->assign('interact_list',$interact_list);
         $this->assign('post',$post);
+        $this->assign('username',session('username'));
         return $this->fetch('./post/detail');
 
     }
@@ -40,6 +72,7 @@ class PostApi extends Controller
 
         $this->assign('tag_arr',$tag_arr);
         $this->assign('name','ThinkPHP');
+        $this->assign('username',session('username'));
         return $this->fetch('./post/publish');
     }
 
@@ -75,5 +108,77 @@ class PostApi extends Controller
         }
 
     }
+
+    public function reply_post()
+    {
+        $content = input('content','');
+        $type = input('type','');
+        $post_id = input('post_id','');
+
+        $params = [
+            'content' => $content,
+            'from_user_id' => session('user_id'),
+            'type' => $type,
+            'post_id' => $post_id
+        ];
+
+        $interact = new Interact();
+
+        $interact->content = $content;
+        $interact->from_user_id = session('user_id');
+        $interact->type = $type;
+        $interact->post_id = $post_id;
+        $interact->create_at = time();
+
+        if($interact->save()){
+
+            return ['ret' => 1,'message' => '发布成功'];
+
+        }else{
+
+            return ['ret' => -1,'message' => '发布失败'];
+
+        }
+
+    }
+
+    public function reply_post_interact()
+    {
+        $content = input('content','');
+        $type = input('type','');
+        $interact_id = input('interact_id','');
+        $at_user_id = input('at_user_id','');
+
+        $params = [
+            'content' => $content,
+            'from_user_id' => session('user_id'),
+            'type' => $type,
+            'interact_id' => $interact_id,
+            'at_user_id' => $at_user_id
+        ];
+
+
+        $reply = new InteractReply();
+
+        $reply->content = $content;
+        $reply->from_user_id = session('user_id');
+        $reply->type = $type;
+        $reply->interact_id = $interact_id;
+        $reply->create_at = time();
+        $reply->at_user_id = $at_user_id;
+
+        if($reply->save()){
+
+            return ['ret' => 1,'message' => '发布成功'];
+
+        }else{
+
+            return ['ret' => -1,'message' => '发布失败'];
+
+        }
+
+    }
+
+
 
 }

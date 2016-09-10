@@ -22,8 +22,12 @@ return [
         '/post/publish_post'=>['PostApi/publish_post',['method' => 'post']],
         '/post/list/:id'=>['PostApi/post_list',['method' => 'get']],
         '/post/detail/:id'=>['PostApi/detail',['method' => 'get']],
+        '/post/reply_post'=>['PostApi/reply_post',['method' => 'post']],
+        '/post/reply_post_interact'=>['PostApi/reply_post_interact',['method' => 'post']],
+
 
         '/login' => ['Index/login',['method' => 'get']],
+        '/exit' => ['Index/exit_account',['method' => 'get']],
 
         '/user/register' => ['UserApi/register',['method' => 'post']],
     ],

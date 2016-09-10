@@ -24,10 +24,16 @@
 
                             <ul class="topic">
                                 {foreach name="vo['list']"]" item="v"}
-                                <li><a href="/index/post/list">{$v->title}</a></li>
+                                <li>
+                                    <a href="/index/post/detail/{$v->id}">{$v->title}</a>
+                                </li>
                                 {/foreach}
                             </ul>
-                            <div class="more"><span><a href="/index/post/list/{$k}">更多</a></span></div>
+                            <div class="more">
+                                <span>
+                                    <a href="/index/post/list/{$k}">更多</a>
+                                </span>
+                            </div>
                         </div>
 
                     {/if}
@@ -51,10 +57,16 @@
 
                             <ul class="topic">
                                 {foreach name="vo['list']" item="v"}
-                                <li><a href="#">{$v->title}</a></li>
+                                <li>
+                                    <a href="/index/post/detail/{$v->id}">{$v->title}</a>
+                                </li>
                                 {/foreach}
                             </ul>
-                            <div class="more"><span>更多</span></div>
+                            <div class="more">
+                                <span>
+                                    <a href="/index/post/list/{$k}">更多</a>
+                                </span>
+                            </div>
                         </div>
 
                     {/if}
@@ -77,10 +89,12 @@
 
                             <ul class="topic">
                                 {foreach name="vo['list']" item="v"}
-                                <li><a href="#">{$v->title}</a></li>
+                                <li>
+                                    <a href="/index/post/detail/{$v->id}">{$v->title}</a>
+                                </li>
                                 {/foreach}
                             </ul>
-                            <div class="more"><span>更多</span></div>
+                            <div class="more"><span><a href="/index/post/list/{$k}">更多</a></span></div>
                         </div>
 
                     {/if}
@@ -103,10 +117,12 @@
 
                         <ul class="topic">
                             {foreach name="vo['list']" item="v"}
-                            <li><a href="#">{$v->title}</a></li>
+                            <li>
+                                <a href="/index/post/detail/{$v->id}">{$v->title}</a>
+                            </li>
                             {/foreach}
                         </ul>
-                        <div class="more"><span>更多</span></div>
+                        <div class="more"><span><a href="/index/post/list/{$k}">更多</a></span></div>
                     </div>
 
                     {/if}
@@ -136,7 +152,12 @@
                 </form>
             </div>
         </div>
+        <!--<div id="app">-->
+            <!--{{ message }}-->
+        <!--</div>-->
     </body>
 <script type="text/javascript" src="static/js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="static/js/header.js"></script>
+<script type="text/javascript" src="static/js/common.js"></script>
+<script type="text/javascript" src="static/js/index.js"></script>
 </html>
