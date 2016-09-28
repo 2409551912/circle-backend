@@ -16,6 +16,7 @@ return [
     '/' => ['Index/index', ['method' => 'get']],
     '[index]'     => [
         '/' => ['Index/index', ['method' => 'get']],
+        '/index_post' => ['Index/index_post', ['method' => 'get']],
 
         //帖子
         '/post/publish'=>['PostApi/publish',['method' => 'get']],
@@ -26,8 +27,9 @@ return [
         '/post/reply_post_interact'=>['PostApi/reply_post_interact',['method' => 'post']],
 
 
-        '/login' => ['Index/login',['method' => 'get']],
+        '/login' => ['Index/login',['method' => 'post']],
         '/exit' => ['Index/exit_account',['method' => 'get']],
+        '/is_login' => ['Index/is_login',['method' => 'get']],
 
         '/user/register' => ['UserApi/register',['method' => 'post']],
     ],

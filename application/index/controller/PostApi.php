@@ -9,6 +9,16 @@ use app\index\model\InteractReply;
 
 class PostApi extends Controller
 {
+
+    public function _initialize()
+    {
+        //设置请求头
+        header('content-type:application:json;charset=utf8');
+        header('Access-Control-Allow-Origin:*');
+        header('Access-Control-Allow-Methods:*');
+        header('Access-Control-Allow-Headers:x-requested-with,content-type');
+    }
+
     public function post_list($id = 1){
         $post = new Post();
         $list = $post->order('id','desc')->where('tag_id',$id)->select();
@@ -18,9 +28,10 @@ class PostApi extends Controller
             $l->username = $user['username'];
         }
 
-        $this->assign('list',$list);
-        $this->assign('username',session('username'));
-        return $this->fetch('./post/list');
+//        $this->assign('list',$list);
+//        return $this->fetch('./post/list');
+
+        return json(['ret'=>1,'list'=>$list]);
 
     }
 
@@ -45,6 +56,8 @@ class PostApi extends Controller
 
             foreach ($reply_interact_list as $r){
 
+                $from_username = User::get($interact->from_user_id)->username;
+                $r->from_username = $from_username;
                 if($r->at_user_id){
 
                     $user = User::get($r->at_user_id);
@@ -59,10 +72,11 @@ class PostApi extends Controller
 
 
 
-        $this->assign('interact_list',$interact_list);
-        $this->assign('post',$post);
-        $this->assign('username',session('username'));
-        return $this->fetch('./post/detail');
+        return json(['ret'=>1,'post'=>$post,'interact_list'=>$interact_list,'username'=>'小小鸟']);
+//        $this->assign('interact_list',$interact_list);
+//        $this->assign('post',$post);
+//        $this->assign('username',session('username'));
+//        return $this->fetch('./post/detail');
 
     }
 
@@ -114,10 +128,9 @@ class PostApi extends Controller
         $content = input('content','');
         $type = input('type','');
         $post_id = input('post_id','');
-
         $params = [
             'content' => $content,
-            'from_user_id' => session('user_id'),
+            'from_user_id' => 215512,
             'type' => $type,
             'post_id' => $post_id
         ];
@@ -132,11 +145,11 @@ class PostApi extends Controller
 
         if($interact->save()){
 
-            return ['ret' => 1,'message' => '发布成功'];
+            return json(['ret' => 1,'message' => '发布成功']);
 
         }else{
 
-            return ['ret' => -1,'message' => '发布失败'];
+            return json(['ret' => -1,'message' => '发布失败']);
 
         }
 

@@ -4,140 +4,33 @@
     <link rel="stylesheet" href="static/css/reset.css">
     <link rel="stylesheet" href="static/css/common.css">
     <link rel="stylesheet" href="static/css/index.css">
+    <script type="text/javascript" src="static/js/baiduTemplate.js"></script>
 </head>
     <body class="index">
         {include file="header" /}
-        <div class="module-wrap clearfix">
-            <div class="col0 col">
-                {foreach name="list" item="vo" key = 'k'}
 
-                    {if condition="$k%4 eq 1"}
-                        <div class="module">
-                            <div>
-                                <div class="head">
-                                    <img src="static/images/download.jpg" alt="">
-                                    <span>{$vo['tag']}</span>
-                                </div><div class="focus">
-                                <span>关注</span>
-                            </div>
-                            </div>
+        <!--<div class="module-wrap clearfix" id="app">-->
+            <!--&lt;!&ndash;<component :is="currentView"></component>&ndash;&gt;-->
+            <!--<ul>-->
+                <!--<li v-for="l in list">-->
+                    <!--{{l.tag}}-->
+                <!--</li>-->
+            <!--</ul>-->
 
-                            <ul class="topic">
-                                {foreach name="vo['list']"]" item="v"}
-                                <li>
-                                    <a href="/index/post/detail/{$v->id}">{$v->title}</a>
-                                </li>
-                                {/foreach}
-                            </ul>
-                            <div class="more">
-                                <span>
-                                    <a href="/index/post/list/{$k}">更多</a>
-                                </span>
-                            </div>
-                        </div>
+        <!--</div>-->
 
-                    {/if}
+        <div class="module-wrap clearfix" id="app">
 
-                {/foreach}
-
-            </div>
-            <div class="col1 col">
-                {foreach name="list" item="vo" key = 'k'}
-
-                    {if condition="$k%4 eq 2"}
-                        <div class="module">
-                            <div>
-                                <div class="head">
-                                    <img src="static/images/download.jpg" alt="">
-                                    <span>{$vo['tag']}</span>
-                                </div><div class="focus">
-                                <span>关注</span>
-                            </div>
-                            </div>
-
-                            <ul class="topic">
-                                {foreach name="vo['list']" item="v"}
-                                <li>
-                                    <a href="/index/post/detail/{$v->id}">{$v->title}</a>
-                                </li>
-                                {/foreach}
-                            </ul>
-                            <div class="more">
-                                <span>
-                                    <a href="/index/post/list/{$k}">更多</a>
-                                </span>
-                            </div>
-                        </div>
-
-                    {/if}
-
-                {/foreach}
-            </div>
-            <div class="col2 col">
-                {foreach name="list" item="vo" key = 'k'}
-
-                    {if condition="$k%4 eq 3"}
-                        <div class="module">
-                            <div>
-                                <div class="head">
-                                    <img src="static/images/download.jpg" alt="">
-                                    <span>{$vo['tag']}</span>
-                                </div><div class="focus">
-                                <span>关注</span>
-                            </div>
-                            </div>
-
-                            <ul class="topic">
-                                {foreach name="vo['list']" item="v"}
-                                <li>
-                                    <a href="/index/post/detail/{$v->id}">{$v->title}</a>
-                                </li>
-                                {/foreach}
-                            </ul>
-                            <div class="more"><span><a href="/index/post/list/{$k}">更多</a></span></div>
-                        </div>
-
-                    {/if}
-
-                {/foreach}
-            </div>
-            <div class="col3 col">
-                {foreach name="list" item="vo" key = 'k'}
-
-                    {if condition="$k%4 eq 0"}
-                    <div class="module">
-                        <div>
-                            <div class="head">
-                                <img src="static/images/download.jpg" alt="">
-                                <span>{$vo['tag']}</span>
-                            </div><div class="focus">
-                            <span>关注</span>
-                        </div>
-                        </div>
-
-                        <ul class="topic">
-                            {foreach name="vo['list']" item="v"}
-                            <li>
-                                <a href="/index/post/detail/{$v->id}">{$v->title}</a>
-                            </li>
-                            {/foreach}
-                        </ul>
-                        <div class="more"><span><a href="/index/post/list/{$k}">更多</a></span></div>
-                    </div>
-
-                    {/if}
-
-                {/foreach}
-            </div>
         </div>
+
         <div class="login-mask hid">
             <div class="login-box">
                 <ul class="nav">
                     <li>
                         <a href="javascript:void(0)" class="login">登陆</a>
                     </li><li class="register">
-                        <a href="javascript:void(0)">注册</a>
-                    </li>
+                    <a href="javascript:void(0)">注册</a>
+                </li>
                 </ul>
                 <form action="" class="login-form">
                     <input type="text" placeholder="请输入账号" name="l-account" class="l-account">
@@ -152,12 +45,212 @@
                 </form>
             </div>
         </div>
-        <!--<div id="app">-->
-            <!--{{ message }}-->
-        <!--</div>-->
+        <script id="t:_1234-abcd-1" type="text/html">
+
+            <div class="col0 col">
+
+                <%for(var i=0;i<list.length;i++){%>
+
+                    <%if(i%4 == 0){%>
+
+                        <div class="module">
+                            <div>
+                                <div class="head">
+                                    <img src="static/images/download.jpg" alt="">
+                                    <span><%=list[i].tag%></span>
+                                </div><div class="focus">
+                                <span>关注</span>
+                            </div>
+                            </div>
+
+                            <ul class="topic">
+                                <%for(var j=0;j<list[i]['list'].length;j++){%>
+                                <li>
+                                    <a href="/index/post/detail/<%=list[i]['list'][j].id%>"><%=list[i]['list'][j].content%></a>
+                                </li>
+                                <%}%>
+                            </ul>
+                            <div class="more">
+                                <span>
+                                    <a href="/index/post/list/<%=list[i].tag_id%>">更多</a>
+                                </span>
+                            </div>
+                        </div>
+
+                    <%}%>
+
+                <%}%>
+
+
+
+            </div>
+
+            <div class="col1 col">
+
+                <%for(var i=0;i<list.length;i++){%>
+
+                <%if(i%4 == 1){%>
+
+                <div class="module">
+                    <div>
+                        <div class="head">
+                            <img src="static/images/download.jpg" alt="">
+                            <span><%=list[i].tag%></span>
+                        </div><div class="focus">
+                        <span>关注</span>
+                    </div>
+                    </div>
+
+                    <ul class="topic">
+                        <%for(var j=0;j<list[i]['list'].length;j++){%>
+                        <li>
+                            <a href="/index/post/detail/<%=list[i]['list'][j].id%>"><%=list[i]['list'][j].content%></a>
+                        </li>
+                        <%}%>
+                    </ul>
+                    <div class="more">
+                        <span>
+                            <a href="/index/post/list/<%=list[i].tag_id%>">更多</a>
+                        </span>
+                    </div>
+                </div>
+
+                <%}%>
+
+                <%}%>
+
+
+
+            </div>
+            <div class="col2 col">
+
+                <%for(var i=0;i<list.length;i++){%>
+
+                    <%if(i%4 == 2){%>
+
+                        <div class="module">
+                            <div>
+                                <div class="head">
+                                    <img src="static/images/download.jpg" alt="">
+                                    <span><%=list[i].tag%></span>
+                                </div><div class="focus">
+                                <span>关注</span>
+                            </div>
+                            </div>
+
+                            <ul class="topic">
+
+                                <%for(var j=0;j<list[i]['list'].length;j++){%>
+                                    <li>
+                                        <a href="/index/post/detail/<%=list[i]['list'][j].id%>"><%=list[i]['list'][j].content%></a>
+                                    </li>
+                                <%}%>
+
+                            </ul>
+                            <div class="more">
+                                <span>
+                                    <a href="/index/post/list/<%=list[i].tag_id%>">更多</a>
+                                </span>
+                            </div>
+                        </div>
+
+                    <%}%>
+
+                <%}%>
+
+            </div>
+
+
+            <div class="col3 col">
+
+                <%for(var i=0;i<list.length;i++){%>
+
+                <%if(i%4 == 2){%>
+
+                <div class="module">
+                    <div>
+                        <div class="head">
+                            <img src="static/images/download.jpg" alt="">
+                            <span><%=list[i].tag%></span>
+                        </div><div class="focus">
+                        <span>关注</span>
+                    </div>
+                    </div>
+
+                    <ul class="topic">
+                        <%for(var j=0;j<list[i]['list'].length;j++){%>
+                        <li>
+                            <a href="/index/post/detail/<%=list[i]['list'][j].id%>"><%=list[i]['list'][j].content%></a>
+                        </li>
+                        <%}%>
+                    </ul>
+                    <div class="more">
+                        <span>
+                            <a href="/index/post/list/<%=list[i].tag_id%>">更多</a>
+                        </span>
+                    </div>
+                </div>
+
+                <%}%>
+
+                <%}%>
+
+            </div>
+        </script>
+        <script type="text/javascript" src="static/js/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript">
+
+            $.ajax({
+                type: "get",
+                url: "index/index_post",
+                dataType: "json",
+                success: function (data) {
+
+                    var data = {
+                        list : transformArr(data.list)
+                    };
+
+                    console.log(data.list);
+
+                    var bt=baidu.template;
+
+                    //可以设置分隔符
+                    //bt.LEFT_DELIMITER='<!';
+                    //bt.RIGHT_DELIMITER='!>';
+
+                    //可以设置输出变量是否自动HTML转义
+                    //bt.ESCAPE = false;
+
+                    //最简使用方法
+                    var html=bt('t:_1234-abcd-1',data);
+
+                    //渲染
+                    document.getElementById('app').innerHTML=html;
+
+                },
+                error: function () {
+                    console.log('llaalal');
+                }
+            });
+
+            function transformArr(data){
+                var arr = [];
+                var index = 0;
+                for(var i in data){
+                    arr[index] = data[i];
+                    index++;
+                }
+                return arr;
+            }
+
+        </script>
+
+
+
     </body>
-<script type="text/javascript" src="static/js/jquery-1.11.3.min.js"></script>
+
 <script type="text/javascript" src="static/js/header.js"></script>
 <script type="text/javascript" src="static/js/common.js"></script>
-<script type="text/javascript" src="static/js/index.js"></script>
+
+
 </html>
