@@ -65,10 +65,9 @@ class PostApi extends Controller
 
             $interact->username = $username;
 
-            if($interact->type == 2){
 
-
-                $is_like_interact = $reply->where(['from_user_id'=>1,'interact_id'=>$interact->id])->value('status');
+            //添加点赞字段
+            if($is_like_interact = $reply->where(['from_user_id'=>1,'interact_id'=>$interact->id,'type'=>2])->value('status')){
 
                 $interact->is_like = $is_like_interact;
             }else{
@@ -76,6 +75,16 @@ class PostApi extends Controller
                 $interact->is_like = 0;
 
             }
+
+            //评论统计字段
+            $comment_count = $reply->where(['interact_id'=>$interact->id,'type'=>1])->count();
+
+            $interact->comment_count = $comment_count;
+
+            //热度字段
+            $like_count = $reply->where(['interact_id'=>$interact->id,'type'=>2,'status'=>1])->count();
+
+            $interact->hot = $comment_count + $like_count;
 
             $reply_interact_list = $reply->where('interact_id',$interact->id)->order('id','desc')->select();
 
