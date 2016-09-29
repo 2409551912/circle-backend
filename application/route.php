@@ -25,6 +25,7 @@ return [
         '/post/detail/:id'=>['PostApi/detail',['method' => 'get']],
         '/post/reply_post'=>['PostApi/reply_post',['method' => 'post']],
         '/post/reply_post_interact'=>['PostApi/reply_post_interact',['method' => 'post']],
+        '/post/like'=>['PostApi/like',['method' => 'post']],
 
 
         '/login' => ['Index/login',['method' => 'post']],

@@ -41,16 +41,41 @@ class PostApi extends Controller
         $user = User::get($post->user_id);
         $post->username = $user->username;
 
+        $auth_id = 1;
+
+
         $interact = new Interact();
+
+        if($interact->where(['from_user_id' => $auth_id,'post_id'=>$id,'type'=>2])->value('status')){
+
+            $is_like = 1;
+
+        }else{
+
+            $is_like = 0;
+
+        }
 
         $reply = new InteractReply();
 
-        $interact_list = $interact->where('post_id', $id)->order('id','desc')->select();
+        $interact_list = $interact->where('post_id', $id)->where('type',1)->order('id','desc')->select();
         foreach ($interact_list as $interact){
 
             $username = User::get($interact->from_user_id)->username;
 
             $interact->username = $username;
+
+            if($interact->type == 2){
+
+
+                $is_like_interact = $reply->where(['from_user_id'=>1,'interact_id'=>$interact->id])->value('status');
+
+                $interact->is_like = $is_like_interact;
+            }else{
+
+                $interact->is_like = 0;
+
+            }
 
             $reply_interact_list = $reply->where('interact_id',$interact->id)->order('id','desc')->select();
 
@@ -72,7 +97,7 @@ class PostApi extends Controller
 
 
 
-        return json(['ret'=>1,'post'=>$post,'interact_list'=>$interact_list,'username'=>'小小鸟']);
+        return json(['ret'=>1,'post'=>$post,'interact_list'=>$interact_list,'username'=>'小小鸟','is_like'=>$is_like]);
 //        $this->assign('interact_list',$interact_list);
 //        $this->assign('post',$post);
 //        $this->assign('username',session('username'));
@@ -123,6 +148,10 @@ class PostApi extends Controller
 
     }
 
+    /**
+     * @评论接口
+     */
+
     public function reply_post()
     {
         $content = input('content','');
@@ -138,7 +167,7 @@ class PostApi extends Controller
         $interact = new Interact();
 
         $interact->content = $content;
-        $interact->from_user_id = session('user_id');
+        $interact->from_user_id = 1;
         $interact->type = $type;
         $interact->post_id = $post_id;
         $interact->create_at = time();
@@ -155,6 +184,10 @@ class PostApi extends Controller
 
     }
 
+    /**
+     * 回复接口
+     */
+
     public function reply_post_interact()
     {
         $content = input('content','');
@@ -164,31 +197,136 @@ class PostApi extends Controller
 
         $params = [
             'content' => $content,
-            'from_user_id' => session('user_id'),
+            'from_user_id' => 1,
             'type' => $type,
             'interact_id' => $interact_id,
             'at_user_id' => $at_user_id
         ];
 
+        $result = $this->validate(
+            $params,
+            [
+                'interact_id' => 'require',
+                'type' =>'require'
+            ]
+        );
+
+        if(true !== $result){
+            // 验证失败 输出错误信息
+            abort(400, '参数异常', ['ret' => -1,'body' => $result]);
+        }
 
         $reply = new InteractReply();
 
-        $reply->content = $content;
-        $reply->from_user_id = session('user_id');
-        $reply->type = $type;
-        $reply->interact_id = $interact_id;
-        $reply->create_at = time();
-        $reply->at_user_id = $at_user_id;
+        if($type == 1){
 
-        if($reply->save()){
-
-            return ['ret' => 1,'message' => '发布成功'];
+            $reply->content = $content;
+            $reply->from_user_id = 1;
+            $reply->type = $type;
+            $reply->interact_id = $interact_id;
+            $reply->create_at = time();
+            $reply->at_user_id = $at_user_id;
 
         }else{
 
-            return ['ret' => -1,'message' => '发布失败'];
+            if($reply->where(['from_user_id' => 1,'interact_id'=>$interact_id,'type'=>2])->find()){
+
+                $reply = $reply->where(['from_user_id' => 1,'interact_id'=>$interact_id,'type'=>2])->find();
+                
+                if($reply->status){
+                    $reply->status = 0;
+                }else{
+                    $reply->status = 1;
+                }
+
+            }else{
+
+                $reply->from_user_id = 1;
+
+                $reply->type = $type;
+
+
+                $reply->interact_id = $interact_id;
+                $reply->create_at = time();
+
+            }
+
 
         }
+
+
+        if($reply->save()){
+
+            return json(['ret' => 1,'message' => '发布成功']);
+
+        }else{
+
+            return json(['ret' => -1,'message' => '发布失败']);
+
+        }
+
+    }
+
+
+
+    /**
+     * 点赞接口
+     * $params post_id 帖子id
+     * $params from_user_id 点赞者id
+     */
+    public function like(){
+
+        $post_id = input('post_id','');
+        $from_user_id = input('from_user_id','');
+
+
+        $params = [
+
+            'post_id' => $post_id,
+            'from_user_id' => $from_user_id,
+            'type' => 2,
+            'create_at' => time()
+
+        ];
+
+        $result = $this->validate(
+           $params,
+            [
+                'post_id' => 'require',
+            ]
+        );
+
+        if(true !== $result){
+            // 验证失败 输出错误信息
+            abort(400, '参数异常', ['ret' => -1,'body' => $result]);
+        }
+
+
+
+        $interact = new Interact();
+
+
+        if($interact = $interact->where(['from_user_id' => $from_user_id,'post_id'=>$post_id,'type'=>2])->find()){
+
+            if($interact->status){
+                $interact->status = 0;
+            }else{
+                $interact->status = 1;
+            }
+
+        }else {
+
+            $interact->post_id = $post_id;
+            $interact->from_user_id = $from_user_id;
+            $interact->type = 2;
+            $interact->create_at = time();
+
+        }
+        $interact->save();
+
+        return json(['ret'=>1,'message' =>'success']);
+
+
 
     }
 
