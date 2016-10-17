@@ -44,6 +44,7 @@ class PostApi extends Controller
         $auth_id = 1;
 
 
+       // var_dump(\Auth::user()->account);die;
         $interact = new Interact();
 
         if($interact->where(['from_user_id' => $auth_id,'post_id'=>$id,'type'=>2])->value('status')){
@@ -166,12 +167,29 @@ class PostApi extends Controller
         $content = input('content','');
         $type = input('type','');
         $post_id = input('post_id','');
+
         $params = [
             'content' => $content,
-            'from_user_id' => 215512,
+            'from_user_id' => \Auth::id(),
             'type' => $type,
             'post_id' => $post_id
         ];
+
+
+        $result = $this->validate(
+            $params,
+            [
+                'type'  => 'require',
+                'post_id'   => 'require',
+                'from_user_id' =>'require'
+            ]);
+
+        if(true !== $result){
+            // 验证失败 输出错误信息
+            return json(['ret'=>-1,'message'=>'参数验证失败']);
+            
+        }
+
 
         $interact = new Interact();
 
@@ -288,11 +306,11 @@ class PostApi extends Controller
         $post_id = input('post_id','');
         $from_user_id = input('from_user_id','');
 
-
+        $from_user_id = 1;
         $params = [
 
             'post_id' => $post_id,
-            'from_user_id' => $from_user_id,
+            'from_user_id' => 1,
             'type' => 2,
             'create_at' => time()
 
@@ -311,11 +329,11 @@ class PostApi extends Controller
         }
 
 
-
         $interact = new Interact();
 
+        if($interact->where(['from_user_id' => $from_user_id,'post_id'=>$post_id,'type'=>2])->find()){
 
-        if($interact = $interact->where(['from_user_id' => $from_user_id,'post_id'=>$post_id,'type'=>2])->find()){
+            $interact = $interact->where(['from_user_id' => $from_user_id,'post_id'=>$post_id,'type'=>2])->find();
 
             if($interact->status){
                 $interact->status = 0;
@@ -326,16 +344,15 @@ class PostApi extends Controller
         }else {
 
             $interact->post_id = $post_id;
-            $interact->from_user_id = $from_user_id;
+            $interact->from_user_id = 1;
             $interact->type = 2;
             $interact->create_at = time();
 
         }
         $interact->save();
 
-        return json(['ret'=>1,'message' =>'success']);
-
-
+        return json(['ret'=>1,'is_like' =>$interact->status]);
+        
 
     }
 

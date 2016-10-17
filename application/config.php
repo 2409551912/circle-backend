@@ -33,8 +33,12 @@ return [
         'auto_start'     => true,
     ],
 
-
-
-
+    //配置redis
+    'redis' => [
+        'host'     => '123.249.54.19',
+        'port'     => 6379,
+        'database' => 0,
+        'password' => ''
+    ],
 
 ];

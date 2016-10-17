@@ -11,11 +11,14 @@ use \think\Log;
 use app\index\model\User;
 use app\index\model\Post;
 
+use Redis\Redis;
+
 class Index extends Controller
 {
 
     public function _initialize()
     {
+
         //设置请求头
         header('content-type:application:json;charset=utf8');
         header('Access-Control-Allow-Origin:*');
@@ -54,6 +57,7 @@ class Index extends Controller
 
         $post = new Post();
 
+        Redis::set('name','hyw');
 
         $tag_arr = $post->column('tag_id');
         foreach ($tag_arr as $key => $t){
@@ -85,26 +89,38 @@ class Index extends Controller
 
         $user = User::get(['account' => $account]);
 
+        if(empty($user)){
+
+            return json(['ret'=>-1,'message'=>'账号或者密码错误']);
+
+        }
+
+
         $is_check = password_verify($password,$user->password);
-
-
 
         if($is_check){
 
+            $bang_token = md5( $account . time() );
+
+            Redis::hset('bang_session',$account,$bang_token);
+
             //需要优化的地方
-            session('account', $user->account);
-            session('user_id', $user->id);
-            session('username', $user->username);
-            return json(['ret'=>1,'message'=>'登陆成功','user_id'=>$user->id,'username'=>$user->username]);
+            return json(['ret'=>1,'message'=>'登陆成功',"body"=>['user'=>$user],'bang_token'=>$bang_token,'bang_account'=>$account]);
 
         }else{
 
-            return json(['ret'=>-1,'message'=>'密码错误']);
+            return json(['ret'=>-1,'message'=>'账号或者密码错误']);
 
         }
 
         
     }
+
+
+
+
+
+
     public function exit_account(){
         session(null);
         $this->redirect('/');
