@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>vue-component</title>
+  </head>
+  <body>
+    <app></app>
+    <script type="text/javascript" src="./jquery.js"></script>
+    <script type="text/javascript">
+      console.log('hahah');
+       $.ajax({
+           type: "GET",
+           url: "http://123.249.54.19:8080/index/post/publish",
+           dataType: "json",
+           success: function(data){
+
+             console.log('haha');
+               app.currentView = 'Home';
+               var list = transformArr(data.list);
+               console.log(list);
+               vm.$set('list', list);
+
+           }
+       });
+    </script>
+  </body>
+</html>

@@ -16,7 +16,7 @@ class PostApi extends Controller
         header('content-type:application:json;charset=utf8');
         header('Access-Control-Allow-Origin:*');
         header('Access-Control-Allow-Methods:*');
-        header('Access-Control-Allow-Headers:x-requested-with,content-type');
+        header('Access-Control-Allow-Headers:*');
     }
 
     public function post_list($id = 1){
@@ -41,13 +41,10 @@ class PostApi extends Controller
         $user = User::get($post->user_id);
         $post->username = $user->username;
 
-        $auth_id = 1;
-
 
        // var_dump(\Auth::user()->account);die;
         $interact = new Interact();
-
-        if($interact->where(['from_user_id' => $auth_id,'post_id'=>$id,'type'=>2])->value('status')){
+        if($interact->where(['from_user_id' => \Auth::id(),'post_id'=>$id,'type'=>2])->value('status')){
 
             $is_like = 1;
 
@@ -175,7 +172,6 @@ class PostApi extends Controller
             'post_id' => $post_id
         ];
 
-
         $result = $this->validate(
             $params,
             [
@@ -194,14 +190,22 @@ class PostApi extends Controller
         $interact = new Interact();
 
         $interact->content = $content;
-        $interact->from_user_id = 1;
+        $interact->from_user_id = \Auth::id();
         $interact->type = $type;
         $interact->post_id = $post_id;
         $interact->create_at = time();
 
         if($interact->save()){
+            //增加字段
+            if ($type == 1) {
+                $interact->comment_count = 0;
+                $interact->hot = 0;
+                $interact->is_like = 0;
+                $interact->reply_list = [];
+                $interact->username = \Auth::user()->username;
+            }
 
-            return json(['ret' => 1,'message' => '发布成功']);
+            return json(['ret' => 1,'message' => '发布成功', 'interact' => $interact]);
 
         }else{
 

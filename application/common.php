@@ -20,12 +20,9 @@ class Auth {
     protected static function getInstance() {
 
         if( ! self::$_user) {
-
             $bang_token = input('bang_token', '');
             $account = input('bang_account', '');
-
             $session_token = Redis::hGet("bang_session", $account);
-
 
             if( $session_token && $bang_token && ($session_token === $bang_token) )
             {
