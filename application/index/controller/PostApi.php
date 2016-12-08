@@ -88,7 +88,7 @@ class PostApi extends Controller
 
             foreach ($reply_interact_list as $r){
 
-                $from_username = User::get($interact->from_user_id)->username;
+                $from_username = User::get($r->from_user_id)->username;
                 $r->from_username = $from_username;
                 if($r->at_user_id){
 
@@ -228,7 +228,7 @@ class PostApi extends Controller
 
         $params = [
             'content' => $content,
-            'from_user_id' => 1,
+            'from_user_id' => \Auth::id(),
             'type' => $type,
             'interact_id' => $interact_id,
             'at_user_id' => $at_user_id
@@ -252,7 +252,7 @@ class PostApi extends Controller
         if($type == 1){
 
             $reply->content = $content;
-            $reply->from_user_id = 1;
+            $reply->from_user_id = \Auth::id();
             $reply->type = $type;
             $reply->interact_id = $interact_id;
             $reply->create_at = time();
@@ -260,9 +260,9 @@ class PostApi extends Controller
 
         }else{
 
-            if($reply->where(['from_user_id' => 1,'interact_id'=>$interact_id,'type'=>2])->find()){
+            if($reply->where(['from_user_id' => \Auth::id(),'interact_id'=>$interact_id,'type'=>2])->find()){
 
-                $reply = $reply->where(['from_user_id' => 1,'interact_id'=>$interact_id,'type'=>2])->find();
+                $reply = $reply->where(['from_user_id' => \Auth::id(),'interact_id'=>$interact_id,'type'=>2])->find();
                 
                 if($reply->status){
                     $reply->status = 0;
@@ -272,7 +272,7 @@ class PostApi extends Controller
 
             }else{
 
-                $reply->from_user_id = 1;
+                $reply->from_user_id = \Auth::id();
 
                 $reply->type = $type;
 
