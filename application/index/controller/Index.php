@@ -1,10 +1,143 @@
 <?php
+
+
+
 namespace app\index\controller;
 
-class Index
+use \think\Controller;
+use \think\Log;
+
+//引入模型
+use app\index\model\User;
+use app\index\model\Post;
+
+use Redis\Redis;
+
+class Index extends Controller
 {
+
+    public function _initialize()
+    {
+
+        //设置请求头
+        header('content-type:application:json;charset=utf8');
+        header('Access-Control-Allow-Origin:*');
+        header('Access-Control-Allow-Methods:*');
+        header('Access-Control-Allow-Headers:x-requested-with,content-type');
+    }
+
     public function index()
     {
-        return '<style type="text/css">*{ padding: 0; margin: 0; } .think_default_text{ padding: 4px 48px;} a{color:#2E5CD5;cursor: pointer;text-decoration: none} a:hover{text-decoration:underline; } body{ background: #fff; font-family: "Century Gothic","Microsoft yahei"; color: #333;font-size:18px} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.6em; font-size: 42px }</style><div style="padding: 24px 48px;"> <h1>:)</h1><p> ThinkPHP V5<br/><span style="font-size:30px">十年磨一剑 - 为API开发设计的高性能框架</span></p><span style="font-size:22px;">[ V5.0 版本由 <a href="http://www.qiniu.com" target="qiniu">七牛云</a> 独家赞助发布 ]</span></div><script type="text/javascript" src="http://tajs.qq.com/stats?sId=9347272" charset="UTF-8"></script><script type="text/javascript" src="http://ad.topthink.com/Public/static/client.js"></script><thinkad id="ad_bd568ce7058a1091"></thinkad>';
+
+        $post = new Post();
+        $tag_arr = $post->column('tag_id');
+        foreach ($tag_arr as $t){
+
+            $list[$t]['list'] = $post->order('id','desc')->where('tag_id',$t)->limit(10)->select();
+            $tag = db('tags')->where('id',$t)->value('tag');
+
+            $list[$t]['tag'] = $tag;
+        }
+
+//        $this->assign('list',$list);
+//        $this->assign('username',session('username'));
+
+
+        
+        return $this->fetch('./index');
+
+//        return json($list);
+
+    }
+
+
+    //主页动态模块
+    public function index_post()
+    {
+
+        $post = new Post();
+
+        Redis::set('name','hyw');
+
+        $tag_arr = $post->column('tag_id');
+        foreach ($tag_arr as $key => $t){
+
+            $list[$t]['list'] = $post->order('id','desc')->where('tag_id',$t)->limit(10)->select();
+            $tag = db('tags')->where('id',$t)->value('tag');
+
+            $list[$t]['tag'] = $tag;
+            $list[$t]['tag_id'] = $t;
+
+        }
+
+//        $this->assign('list',$list);
+//        $this->assign('username',session('username'));
+
+//        return $this->fetch('./index');
+
+//        return $_GET['callback']."(".json_encode(['ret' => '1','list' => $list]).")";
+
+
+        return json(['ret' => '1','list' => $list]);
+
+    }
+
+    public function login(){
+
+        $account = input('account','');
+        $password = input('password','');
+
+        $user = User::get(['account' => $account]);
+
+        if(empty($user)){
+
+            return json(['ret'=>-1,'message'=>'账号或者密码错误']);
+
+        }
+
+
+        $is_check = password_verify($password,$user->password);
+
+        if($is_check){
+
+            $bang_token = md5( $account . time() );
+
+            Redis::hset('bang_session',$account,$bang_token);
+
+            //需要优化的地方
+            return json(['ret'=>1,'message'=>'登陆成功',"body"=>['user'=>$user],'bang_token'=>$bang_token,'bang_account'=>$account]);
+
+        }else{
+
+            return json(['ret'=>-1,'message'=>'账号或者密码错误']);
+
+        }
+
+        
+    }
+
+
+
+
+
+
+    public function exit_account(){
+        session(null);
+        $this->redirect('/');
+    }
+
+    public function is_login(){
+
+        if(!empty(session('username'))){
+
+            return json(['ret'=>1,'is_login'=>session('username')]);
+
+        }else{
+
+            return json(['ret'=>-1,'is_login'=>session('username')]);
+
+        }
+
+
     }
 }

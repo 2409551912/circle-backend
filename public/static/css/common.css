@@ -1,0 +1,111 @@
+html{
+    font-family: "Hiragino Sans GB","Microsoft YaHei","微软雅黑",tahoma,arial,simhei,"黑体";
+}
+body{
+    background: #ededef;
+}
+.hid{
+    display: none;
+}
+.red{
+    color: #f00;
+}
+.iconfont{
+    font-family:"iconfont";
+    font-size:16px;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+    font-family: 'iconfont';
+    src: url('//at.alicdn.com/t/font_1473428792_758629.eot'); /* IE9*/
+    src: url('//at.alicdn.com/t/font_1473428792_758629.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('//at.alicdn.com/t/font_1473428792_758629.woff') format('woff'), /* chrome、firefox */
+    url('//at.alicdn.com/t/font_1473428792_758629.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('//at.alicdn.com/t/font_1473428792_758629.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+
+.clearfix {
+    *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    line-height: 0;
+    content: "";
+}
+
+.clearfix:after {
+    clear: both;
+}
+a{
+    text-decoration: none;
+}
+
+
+/*公共顶部*/
+.public-header{
+    width: 100%;
+    height: 5rem;
+    background: #24292c;
+    color: #ededed;
+    position: relative;
+}
+.public-header .box{
+    margin: 0 auto;
+    width: 60rem;
+}
+.public-header .logo{
+    font-size: 2rem;
+    display: inline-block;
+    margin: 1.5rem 4rem auto 0;
+    font-family: "SimSun";
+}
+.public-header .nav{
+    display: inline-block;
+}
+.public-header .nav ul{
+    list-style-type: none;
+}
+.public-header .account{
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 0.7rem;
+}
+.public-header .account a{
+    color: #fff;
+    text-decoration: none;
+    margin-right: 10px;
+}
+.public-header .personal{
+    margin-right: 4px;
+    font-size: 0.9rem;
+}
+.public-header .write{
+    position: fixed;
+    right: 0rem;
+    top:10rem;
+}
+.public-header .write i{
+    color: #000;
+    font-size: 2rem;
+}
+.public-header .personal-nav{
+    width: 100%;
+    color: #000;
+    border: 1px solid #fff;
+    margin-top: 0.2rem;
+}
+.public-header .personal-nav li{
+    padding: 0.15rem 0px;
+    border-radius: 2rem;
+    text-align: center;
+}
+.public-header .personal-nav a{
+    margin-right: 0px;
+}

@@ -1,0 +1,222 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="PUBLIC_PATH/static/css/reset.css">
+    <link rel="stylesheet" href="PUBLIC_PATH/static/css/common.css">
+    <link rel="stylesheet" href="PUBLIC_PATH/static/css/post-detail.css">
+</head>
+<body>
+<!--<div style="width: 50px;height:100px;background-color: green;float: left"></div>-->
+<!--<div style="margin-left: 50px;height:100px;">-->
+<!--<div style="background-color: #000;height:100px;"></div>-->
+<!--</div>-->
+{include file="header" /}
+<div class="post-detail">
+    <div class="outer">
+
+        <div class="detail clearfix">
+            <div class="inner">
+                <div class="user clearfix">
+
+                    <p class="title">{$post->title}</p>
+
+                    <div class="user-info">
+                        <img src="http://cdn.bangyoung.com/cdn/user_portrait/20160902/beijingdaxue/32r2r2r.jpg" alt="" class="host-head">
+                        <p class="name">{$post->username}</p>
+                    </div>
+
+                </div>
+                <div class="post">
+                   <p class="content">{$post->content}</p>
+                    <a href="javascript:void(0)" class="comment" id="p-comment">参与评论</a>
+                    <i class="iconfont praise">&#xe601;</i>
+                </div>
+                <div class="post-comment hid">
+                    <form action="">
+                        <textarea name="" id="comment-detail" rows="8"></textarea>
+                        <div>
+                            <a href="javascript:void(0)" class="cancel">收起</a>
+                            <a href="javascript:void(0)" class="publish" post-id="{$post->id}">发布</a>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="comment-order">
+                    <a href="">最新评论</a>
+                    <a href="">热门评论</a>
+                </div>
+
+            </div>
+
+        </div>
+        {foreach name="interact_list" item="interact"}
+        <div class="item clearfix">
+            <img src="http://cdn.bangyoung.com/cdn/user_portrait/20160902/beijingdaxue/32r2r2r.jpg" alt="" class="head">
+            <div class="comment">
+                <div class="comment-box">
+                    <p class="user">
+                        <span class="name">{$interact->username}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="time">{$interact->create_at|date="Y-m-d H:i:s",###}</span></p>
+                    <div class="content">
+                        {$interact->content}
+                    </div>
+                    <p class="interact"><span>热度(10)</span><span><a href="javascript:void(0)"class="reply">评论(1)</a></span><span>点赞 <i class="iconfont praise">&#xe601;</i></span></p>
+                </div>
+                <div class="reply-interact hid clearfix">
+                    <div class="reply-box clearfix">
+                        <input type="hidden" class="at-user">
+                        <input type="text" class="reply-content">
+                        <a href="javascript:void(0)" class="publish" interact-id="{$interact->id}">发布</a>
+                    </div>
+
+                    <ul class="reply-interact-box">
+                        {foreach name='interact->reply_list' item="reply"}
+
+                        <li class="clearfix">
+
+                            <img src="http://cdn.bangyoung.com/cdn/user_portrait/20160902/beijingdaxue/32r2r2r.jpg" alt="" class="head">
+                            <p>
+                                <span class="name">小小鸟</span>
+                                {if condition="($reply->at_user_id)"}
+                                    <span>回复了</span>
+                                    <span class="at-username">{$reply->at_username}</span>
+                                {/if}
+                                <span>{$reply->content}</span>
+                            </p>
+                            <a href="javascript:void(0)" class="reply" from_user_id="{$reply->from_user_id}">回复</a>
+
+                        </li>
+
+                        {/foreach}
+
+                    </ul>
+
+
+                </div>
+
+            </div>
+        </div>
+        {/foreach}
+
+
+    </div>
+    <!--<div class="comment-publish">-->
+        <!--<div class="outer">-->
+            <!--<div class="item clearfix">-->
+                <!--<img src="http://cdn.bangyoung.com/cdn/user_portrait/20160902/beijingdaxue/32r2r2r.jpg" alt="" class="head">-->
+                <!--<div class="comment">-->
+                    <!--<div>-->
+                        <!--<p>小小鸟</p>-->
+                        <!--<form action="">-->
+                            <!--<input type="text">-->
+                        <!--</form>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+</div>
+
+</body>
+<script type="text/javascript" src="PUBLIC_PATH/static/js/jquery-1.11.3.min.js"></script>
+<!--<script type="text/javascript" src="PUBLIC_PATH/static/js/header.js"></script>-->
+<script type="text/javascript">
+
+    $("#publish").click(function () {
+
+
+        var v = {
+            title : $("[name=title]").val(),
+            content : $("[name=content]").val(),
+            tag_id : $("[name=tag_id]").val()
+        };
+
+        console.log(v);
+        $.post('/index/post/publish_post',v,function (data,status) {
+            if(data.ret == 1){
+                window.location.href='/';
+            }
+        })
+    })
+
+    $("#p-comment").bind('click',function () {
+        $(".post-comment").slideToggle();
+    });
+
+    $(".post-comment .cancel").bind('click',function () {
+        $(".post-comment").slideUp();
+    });
+    $(".post-comment .publish").bind('click',function () {
+
+        var content = $("#comment-detail").val(),
+            postId = $(this).attr("post-id");
+
+        $.ajax({
+
+            type:"POST",
+            url:"/index/post/reply_post",
+            data:{
+                content:content,
+                type:1,
+                post_id:postId
+            },
+            dataType:"json",
+            success:function (data) {
+
+                if(data.ret == 1){
+                    window.location.reload();
+                }
+
+            }
+
+       })
+    });
+
+    $(".comment .interact .reply").bind('click',function () {
+        var parentComment = $(this).parents(".comment");
+        parentComment.find(".reply-interact").slideToggle();
+    })
+
+    $(".reply-interact .publish").click(function () {
+
+        var inputContent = $(this).prev(),
+            content = inputContent.val(),
+            interactId = $(this).attr("interact-id"),
+            atUserId = inputContent.prev().val();
+
+        $.ajax({
+
+            type:"POST",
+            url:"/index/post/reply_post_interact",
+            data:{
+
+                content:content,
+                type:1,
+                interact_id:interactId,
+                at_user_id:atUserId
+
+            },
+            dataType:"json",
+            success:function (data) {
+
+                if(data.ret == 1){
+                    window.location.reload();
+                }
+
+            }
+
+        })
+    })
+    $(".reply-interact-box .reply").bind("click",function () {
+        var atUser = $(this).attr("from_user_id");
+        var comment = $(this).parents(".comment");
+        comment.find(".at-user").val(atUser);
+
+        var atUserName = $(this).prev().find(".name").text();
+        comment.find(".reply-content").attr("placeholder","回复  "+atUserName+" : ");
+        comment.find(".reply-content").focus();
+
+    })
+
+
+</script>
+</html>

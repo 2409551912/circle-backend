@@ -1,0 +1,57 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="PUBLIC_PATH/static/css/reset.css">
+    <link rel="stylesheet" href="PUBLIC_PATH/static/css/common.css">
+    <link rel="stylesheet" href="PUBLIC_PATH/static/css/post-publish.css">
+</head>
+<body>
+{include file="header" /}
+    <div class="post-publish">
+        <div class="editor">
+            <form action="">
+                <div class="title">
+                    <p>发表帖子</p>
+                    <input type="text" name="title"/><select name="tag_id" id="tag">
+
+                        {foreach $tag_arr as $t}
+
+                            <option value="{$t['id']}">{$t['tag']}</option>
+
+                        {/foreach}
+
+                    </select>
+                </div>
+                <div class="content">
+                    <textarea id="" cols="30" rows="20" name="content"></textarea>
+                </div>
+                <a href="javascript:void(0)" class="publish" id="publish">发布</a>
+            </form>
+        </div>
+    </div>
+
+</body>
+<script type="text/javascript" src="PUBLIC_PATH/static/js/jquery-1.11.3.min.js"></script>
+<!--<script type="text/javascript" src="PUBLIC_PATH/static/js/header.js"></script>-->
+<script type="text/javascript">
+
+    $("#publish").click(function () {
+
+
+        var v = {
+            title : $("[name=title]").val(),
+            content : $("[name=content]").val(),
+            tag_id : $("[name=tag_id]").val()
+        };
+
+        console.log(v);
+        $.post('/index/post/publish_post',v,function (data,status) {
+            if(data.ret == 1){
+                window.location.href='/';
+            }
+        })
+    })
+
+
+</script>
+</html>

@@ -13,9 +13,26 @@ return [
     '__pattern__' => [
         'name' => '\w+',
     ],
-    '[hello]'     => [
-        ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
-        ':name' => ['index/hello', ['method' => 'post']],
+    '/' => ['Index/index', ['method' => 'get']],
+    '[index]'     => [
+        '/' => ['Index/index', ['method' => 'get']],
+        '/login' => ['Index/login',['method' => 'post']],
+        '/index_post' => ['Index/index_post', ['method' => 'get']],
+
+        //帖子
+        '/post/publish'=>['PostApi/publish',['method' => 'get']],
+        '/post/publish_post'=>['PostApi/publish_post',['method' => 'post']],
+        '/post/list/:id'=>['PostApi/post_list',['method' => 'get']],
+        '/post/detail/:id'=>['PostApi/detail',['method' => 'get']],
+//        '/post/reply_post'=>['PostApi/reply_post',['method' => 'post','before_behavior'=>'\app\index\behavior\LoginCheck']],
+        '/post/reply_post'=>['PostApi/reply_post',['method' => 'post']],
+        '/post/reply_post_interact'=>['PostApi/reply_post_interact',['method' => 'post']],
+        '/post/like'=>['PostApi/like',['method' => 'post']],
+
+        '/exit' => ['Index/exit_account',['method' => 'get']],
+        '/is_login' => ['Index/is_login',['method' => 'get']],
+
+        '/user/register' => ['UserApi/register',['method' => 'post']],
     ],
 
 ];
