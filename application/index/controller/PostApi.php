@@ -41,8 +41,6 @@ class PostApi extends Controller
         $user = User::get($post->user_id);
         $post->username = $user->username;
 
-
-       // var_dump(\Auth::user()->account);die;
         $interact = new Interact();
         if($interact->where(['from_user_id' => \Auth::id(),'post_id'=>$id,'type'=>2])->value('status')){
 
@@ -65,7 +63,7 @@ class PostApi extends Controller
 
 
             //添加点赞字段
-            if($is_like_interact = $reply->where(['from_user_id'=>1,'interact_id'=>$interact->id,'type'=>2])->value('status')){
+            if($is_like_interact = $reply->where(['from_user_id'=>\Auth::id(), 'interact_id'=>$interact->id, 'type'=>2])->value('status')){
 
                 $interact->is_like = $is_like_interact;
             }else{
@@ -87,7 +85,6 @@ class PostApi extends Controller
             $reply_interact_list = $reply->where('interact_id',$interact->id)->order('id','desc')->select();
 
             foreach ($reply_interact_list as $r){
-
                 $from_username = User::get($r->from_user_id)->username;
                 $r->from_username = $from_username;
                 if($r->at_user_id){
@@ -189,22 +186,36 @@ class PostApi extends Controller
 
         $interact = new Interact();
 
-        $interact->content = $content;
-        $interact->from_user_id = \Auth::id();
-        $interact->type = $type;
-        $interact->post_id = $post_id;
-        $interact->create_at = time();
+        if($type == 2 && $interact->where(['from_user_id' => \Auth::id(), 'post_id'=>$post_id, 'type'=>2])->find()){
+
+            $interact = $interact->where(['from_user_id' => \Auth::id(), 'post_id'=>$post_id, 'type'=>2])->find();
+            if($interact->status){
+                $interact->status = 0;
+            }else{
+                $interact->status = 1;
+            }
+
+        } else {
+
+            $interact->content = $content;
+            $interact->from_user_id = \Auth::id();
+            $interact->type = $type;
+            $interact->post_id = $post_id;
+            $interact->create_at = time();
+
+        }
 
         if($interact->save()){
             //增加字段
             if ($type == 1) {
+
                 $interact->comment_count = 0;
                 $interact->hot = 0;
                 $interact->is_like = 0;
                 $interact->reply_list = [];
                 $interact->username = \Auth::user()->username;
-            }
 
+            }
             return json(['ret' => 1,'message' => '发布成功', 'interact' => $interact]);
 
         }else{
@@ -260,9 +271,9 @@ class PostApi extends Controller
 
         }else{
 
-            if($reply->where(['from_user_id' => \Auth::id(),'interact_id'=>$interact_id,'type'=>2])->find()){
+            if($reply->where(['from_user_id' => \Auth::id(),'interact_id'=>$interact_id,'type'=>$type])->find()){
 
-                $reply = $reply->where(['from_user_id' => \Auth::id(),'interact_id'=>$interact_id,'type'=>2])->find();
+                $reply = $reply->where(['from_user_id' => \Auth::id(),'interact_id'=>$interact_id,'type'=>$type])->find();
                 
                 if($reply->status){
                     $reply->status = 0;
@@ -275,8 +286,7 @@ class PostApi extends Controller
                 $reply->from_user_id = \Auth::id();
 
                 $reply->type = $type;
-
-
+                $reply->status = 1;
                 $reply->interact_id = $interact_id;
                 $reply->create_at = time();
 
@@ -285,10 +295,14 @@ class PostApi extends Controller
 
         }
 
-
         if($reply->save()){
 
-            return json(['ret' => 1,'message' => '发布成功']);
+            $reply->from_username = \Auth::user()->username;
+            if(!empty($at_user_id)) {
+                $reply->at_username = User::get($at_user_id)->username;
+            }
+
+            return json(['ret' => 1,'message' => '发布成功', 'reply' => $reply]);
 
         }else{
 
@@ -310,11 +324,11 @@ class PostApi extends Controller
         $post_id = input('post_id','');
         $from_user_id = input('from_user_id','');
 
-        $from_user_id = 1;
+        $from_user_id = \Auth::id();
         $params = [
 
             'post_id' => $post_id,
-            'from_user_id' => 1,
+            'from_user_id' => $from_user_id,
             'type' => 2,
             'create_at' => time()
 
