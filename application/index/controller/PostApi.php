@@ -127,7 +127,7 @@ class PostApi extends Controller
         $params = [
             'title' => $title,
             'content' => $content,
-            'user_id' => session('user_id'),
+            'user_id' => \Auth::id(),
             'tag_id' => $tag_id
         ];
 
@@ -137,16 +137,15 @@ class PostApi extends Controller
         $post->title = $title;
         $post->content = $content;
         $post->tag_id = $tag_id;
-        $post->user_id = session('user_id');
+        $post->user_id = \Auth::id();
         $post->create_at = time();
-
         if($post->save()){
 
-            return ['ret' => 1,'message' => '发布成功'];
+            return json(['ret' => 1,'message' => '发布成功']);
 
         }else{
 
-            return ['ret' => -1,'message' => '发布失败'];
+            return json(['ret' => -1,'message' => '发布失败']);
 
         }
 
